@@ -1,7 +1,4 @@
-<?php
-
-add_action( 'plugins_loaded', 'WPAPIYoast_init' );
-
+<?php // @codingStandardsIgnoreStart
 /**
  * Plugin Name: Yoast to REST API
  * Description: Adds Yoast fields to page and post metadata to WP REST API responses
@@ -238,3 +235,5 @@ function wpseo_not_loaded() {
 		__( '<b>Yoast to REST API</b> plugin not working because <b>Yoast SEO</b> plugin is not active.' )
 	);
 }
+
+add_action( 'plugins_loaded', 'WPAPIYoast_init' );
