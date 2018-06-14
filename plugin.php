@@ -153,7 +153,7 @@ class Yoast_To_REST_API {
 			'yoast_wpseo_company_name'         => $yoast_titles['company_name'] ?? '',
 			'yoast_wpseo_company_logo'         => $yoast_titles['company_logo'] ?? '',
 			'yoast_wpseo_website_name'         => $yoast_titles['website_name'] ?? '',
-			'yoast_wpseo_social_defaults'      => get_option( 'wpseo_social' ) ?? '',
+			'yoast_wpseo_social_defaults'      => get_option( 'wpseo_social' ),
 		);
 
 		/**
@@ -179,7 +179,7 @@ class Yoast_To_REST_API {
 		$yoast_meta = array(
 			'yoast_wpseo_title'           => $wpseo_frontend->get_taxonomy_title(),
 			'yoast_wpseo_metadesc'        => $wpseo_frontend->metadesc( false ),
-			'yoast_wpseo_social_defaults' => get_option( 'wpseo_social' ) ?? '',
+			'yoast_wpseo_social_defaults' => get_option( 'wpseo_social' ),
 		);
 
 		/**
