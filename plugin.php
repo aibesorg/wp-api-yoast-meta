@@ -198,11 +198,7 @@ class Yoast_To_REST_API {
 	}
 
 	function wp_api_encode_yoast_category( $category ) {
-		query_posts(
-			array(
-				'cat' => $category['id'],
-			)
-		);
+		query_posts( array( 'cat' => $category['id'] ) );
 
 		the_post();
 
@@ -214,11 +210,7 @@ class Yoast_To_REST_API {
 	}
 
 	function wp_api_encode_yoast_tag( $tag ) {
-		query_posts(
-			array(
-				'tag_id' => $tag['id'],
-			)
-		);
+		query_posts( array( 'tag_id' => $tag['id'] ) );
 
 		the_post();
 
