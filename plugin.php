@@ -147,7 +147,6 @@ class Yoast_To_REST_API {
 			'yoast_wpseo_twitter_description'  => get_post_meta( $p['id'], '_yoast_wpseo_twitter-description', true ),
 			'yoast_wpseo_twitter_image'        => get_post_meta( $p['id'], '_yoast_wpseo_twitter-image', true ),
 			'yoast_wpseo_social_url'           => get_permalink( $p['id'] ) ?? '',
-			'yoast_wpseo_website_name'         => $yoast_titles['website_name'] ?? '',
 			'yoast_wpseo_company_or_person'    => $yoast_titles['company_or_person'] ?? '',
 			'yoast_wpseo_person_name'          => $yoast_titles['person_name'] ?? '',
 			'yoast_wpseo_company_name'         => $yoast_titles['company_name'] ?? '',
