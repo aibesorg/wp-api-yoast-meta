@@ -164,22 +164,22 @@ class Yoast_To_REST_API {
 		$yoast_titles = get_option( 'wpseo_titles' );
 
 		$yoast_meta = array(
-			'yoast_wpseo_title'                => $wpseo_frontend->get_content_title() ?? '',
-			'yoast_wpseo_metadesc'             => $wpseo_frontend->metadesc( false ) ?? '',
-			'yoast_wpseo_canonical'            => $wpseo_frontend->canonical( false ) ?? '',
+			'yoast_wpseo_title'                => $wpseo_frontend->get_content_title() ? $wpseo_frontend->get_content_title() : '',
+			'yoast_wpseo_metadesc'             => $wpseo_frontend->metadesc( false ) ? $wpseo_frontend->metadesc( false ) : '',
+			'yoast_wpseo_canonical'            => $wpseo_frontend->canonical( false ) ? $wpseo_frontend->canonical( false ) : '',
 			'yoast_wpseo_facebook_title'       => get_post_meta( $p['id'], '_yoast_wpseo_opengraph-title', true ),
 			'yoast_wpseo_facebook_description' => get_post_meta( $p['id'], '_yoast_wpseo_opengraph-description', true ),
-			'yoast_wpseo_facebook_type'        => $p['type'] ?? '',
+			'yoast_wpseo_facebook_type'        => $p['type'] ? $p['type'] : '',
 			'yoast_wpseo_facebook_image'       => get_post_meta( $p['id'], '_yoast_wpseo_opengraph-image', true ),
 			'yoast_wpseo_twitter_title'        => get_post_meta( $p['id'], '_yoast_wpseo_twitter-title', true ),
 			'yoast_wpseo_twitter_description'  => get_post_meta( $p['id'], '_yoast_wpseo_twitter-description', true ),
 			'yoast_wpseo_twitter_image'        => get_post_meta( $p['id'], '_yoast_wpseo_twitter-image', true ),
-			'yoast_wpseo_social_url'           => get_permalink( $p['id'] ) ?? '',
-			'yoast_wpseo_company_or_person'    => $yoast_titles['company_or_person'] ?? '',
-			'yoast_wpseo_person_name'          => $yoast_titles['person_name'] ?? '',
-			'yoast_wpseo_company_name'         => $yoast_titles['company_name'] ?? '',
-			'yoast_wpseo_company_logo'         => $yoast_titles['company_logo'] ?? '',
-			'yoast_wpseo_website_name'         => $yoast_titles['website_name'] ?? '',
+			'yoast_wpseo_social_url'           => get_permalink( $p['id'] ) ? get_permalink( $p['id'] ) : '',
+			'yoast_wpseo_company_or_person'    => $yoast_titles['company_or_person'] ? $yoast_titles['company_or_person'] : '',
+			'yoast_wpseo_person_name'          => $yoast_titles['person_name'] ? $yoast_titles['person_name'] : '',
+			'yoast_wpseo_company_name'         => $yoast_titles['company_name'] ? $yoast_titles['company_name'] : '',
+			'yoast_wpseo_company_logo'         => $yoast_titles['company_logo'] ? $yoast_titles['company_logo'] : '',
+			'yoast_wpseo_website_name'         => $yoast_titles['website_name'] ? $yoast_titles['website_name'] : '',
 			'yoast_wpseo_social_defaults'      => get_option( 'wpseo_social' ),
 		);
 
