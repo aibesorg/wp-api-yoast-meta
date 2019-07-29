@@ -84,20 +84,38 @@ class Yoast_To_REST_API {
 		);
 
 		// Public custom post types
-		$types = get_post_types(
+		$post_types = get_post_types(
 			array(
 				'public'   => true,
 				'_builtin' => false,
 			)
 		);
 
-		foreach ( $types as $key => $type ) {
+		foreach ( $post_types as $key => $type ) {
 			register_rest_field(
 				$type,
 				'yoast_meta',
 				array(
 					'get_callback'    => array( $this, 'wp_api_encode_yoast' ),
 					'update_callback' => array( $this, 'wp_api_update_yoast' ),
+					'schema'          => null,
+				)
+			);
+		}
+
+		// Public custom taxonomy types
+		$taxonomy_types = get_taxonomies(array(
+				'public'   => true,
+				'_builtin' => false,
+			)
+		);
+
+		foreach ( $taxonomy_types as $key => $type ) {
+			register_rest_field(
+				$type,
+				'yoast_meta',
+				array(
+					'get_callback'    => array( $this, 'wp_api_encode_custom_taxonomy' ),
 					'schema'          => null,
 				)
 			);
@@ -133,6 +151,35 @@ class Yoast_To_REST_API {
 			'yoast_wpseo_title'           => $wpseo_frontend->get_taxonomy_title(),
 			'yoast_wpseo_metadesc'        => $wpseo_frontend->metadesc( false ),
 			'yoast_wpseo_social_defaults' => get_option( 'wpseo_social' ),
+		);
+
+		/**
+		 * Filter the returned yoast meta for a taxonomy.
+		 *
+		 * @since 1.4.2
+		 * @param array $yoast_meta Array of metadata to return from Yoast.
+		 * @return array $yoast_meta Filtered meta array.
+		 */
+		$yoast_meta = apply_filters( 'wpseo_to_api_yoast_taxonomy_meta', $yoast_meta );
+
+		return (array) $yoast_meta;
+	}
+
+	function wp_api_encode_custom_taxonomy($t, $field_name, $request) {
+		$wpseo_taxonomy = WPSEO_Taxonomy_Meta::get_instance();
+
+		$term_meta = $wpseo_taxonomy->get_term_meta($t['slug'], $t['taxonomy']);
+
+		$yoast_meta = array(
+			'yoast_wpseo_title'                => $term_meta["wpseo_title"],
+			'yoast_wpseo_metadesc'             => $term_meta["wpseo_desc"],
+			'yoast_wpseo_canonical'            => $term_meta["wpseo_canonical"],
+			'yoast_wpseo_facebook_title'       => $term_meta["wpseo_opengraph-title"],
+			'yoast_wpseo_facebook_description' => $term_meta["wpseo_opengraph-description"],
+			'yoast_wpseo_facebook_image'       => $term_meta["wpseo_opengraph-image"],
+			'yoast_wpseo_twitter_title'        => $term_meta["wpseo_twitter-title"],
+			'yoast_wpseo_twitter_description'  => $term_meta["wpseo_twitter-description"],
+			'yoast_wpseo_twitter_image'        => $term_meta["wpseo_twitter-image"],
 		);
 
 		/**
